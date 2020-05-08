@@ -12,18 +12,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Variable to keep track of the initial position of text view based on seek bar progress so that we can move it back to where it started
-        // we translate the text view along the y axis
+        /* Variable to keep track of the initial position of text view based on seek bar progress so that we can move it back to where it started
+         we translate the text view along the y axis */
         val initialTextViewTranslationY = textView_progress.translationY
 
         // Listen to changes of seek bar
         seekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener{
 
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                // setting textview to current progress
+                // setting text view to current progress
                 textView_progress.text = progress.toString()
 
-                // variable to create animation distance for textview
+                // variable to create animation distance for text view
 
                 // animation steps should be defined such that it's resolution independent
                 val translationDistance = (initialTextViewTranslationY + progress *
@@ -33,12 +33,12 @@ class MainActivity : AppCompatActivity() {
                 // Now we are animating by passing this distance
                 textView_progress.animate().translationY(translationDistance)
 
-                /* 1) from User is a boolean value ..will be true, if the change was done by user and will be false if done by function
+                /*  fromUser is a boolean value ..will be true, if the change was done by user and will be false if done by function
 
-                 2) when you call reset, we are setting seekbar progress to 0 which is done programmatically means fromUser is false
+                 2) when you call reset, we are setting seek bar progress to 0 which is done programmatically means fromUser is false
 
-                 so one time when we click reset, seekbar is set to 0, which calls the onprogresschanged and then if not fromuser, we are making animation
-                 but next time when we call it, already the seekbar is at 0 and hence it won't make any difference
+                 so one time when we click reset, seek bar is set to 0, which calls the on progress changed and then if not fromUser, we are making animation
+                 but next time when we call it, already the seek bar is at 0 and hence it won't make any difference
 
                  */
 
